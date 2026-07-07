@@ -77,7 +77,6 @@
         <section class="about section-pad" id="about">
             <div class="container">
                 <div class="section-title title-bordered">
-                    <span>Часть II</span>
                     <h2>О Федеральной грузинской<br>национально-культурной автономии</h2>
                 </div>
 
@@ -91,7 +90,6 @@
                     <aside class="about-side">
                         <div class="image-card image-card-light">
                             <img src="{{ asset('images/about-event.jpg') }}" alt="Мероприятия автономии, культурные встречи и общественные проекты" onerror="this.hidden=true">
-                            <span>Мероприятия автономии, культурные встречи и общественные проекты</span>
                         </div>
                         <div class="caption">Культурно-просветительская работа ФГНКА</div>
                         <div class="facts-list">
@@ -108,7 +106,6 @@
         <section class="leader section-pad" id="leader">
             <div class="container">
                 <div class="section-title title-bordered title-light">
-                    <span>Часть III</span>
                     <h2>Обращение<br>руководства автономии</h2>
                 </div>
 
@@ -116,7 +113,6 @@
                     <div>
                         <div class="portrait-card">
                             <img src="{{ asset('images/leader.jpg') }}" alt="Руководитель Федеральной грузинской национально-культурной автономии" onerror="this.hidden=true">
-                            <span>Руководитель Федеральной грузинской национально-культурной автономии</span>
                             <div class="portrait-caption">
                                 <strong>Давид Цецхладзе</strong>
                                 <small>Президент ФГНКА</small>
@@ -139,7 +135,6 @@
         <section class="activity section-pad" id="activity">
             <div class="container">
                 <div class="section-title title-bordered">
-                    <span>Часть IV</span>
                     <h2>Направления<br>деятельности</h2>
                 </div>
                 <p class="section-intro">Работа автономии строится вокруг задач, характерных для ФНКА: сохранение языка и культуры, поддержка образования, развитие региональных связей, общественное представительство и межкультурный диалог.</p>
@@ -185,7 +180,6 @@
 
                 <div class="community-banner" id="join">
                     <img src="{{ asset('images/join-community.jpg') }}" alt="Участники культурного проекта ФГНКА" onerror="this.hidden=true">
-                    <span>ФГНКА — открытая площадка для соотечественников и партнёров</span>
                     <div>
                         <h2>Присоединяйтесь к работе автономии</h2>
                         <p>Культура сильна, когда она объединяет людей</p>

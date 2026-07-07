@@ -1004,3 +1004,199 @@ svg {
         letter-spacing: .17em;
     }
 }
+
+/* Photo integration */
+.hero-visual {
+    position: relative;
+    min-height: 560px;
+    align-self: center;
+    margin-left: 44px;
+}
+
+.hero-photo {
+    position: absolute;
+    overflow: hidden;
+    background:
+        linear-gradient(135deg, rgba(216,0,39,.08), transparent 48%),
+        repeating-linear-gradient(-45deg, rgba(216,0,39,.035) 0 12px, transparent 12px 24px),
+        var(--paper-soft);
+    border: 1px solid rgba(216,0,39,.16);
+    box-shadow: 0 28px 70px rgba(52, 20, 20, .09);
+}
+
+.hero-photo img,
+.image-card img,
+.portrait-card img,
+.community-banner img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.hero-photo-main {
+    top: 22px;
+    right: 0;
+    width: min(420px, 84%);
+    height: 560px;
+}
+
+.hero-photo-small {
+    left: 0;
+    bottom: 78px;
+    width: 250px;
+    height: 320px;
+    border-bottom: 4px solid var(--red);
+}
+
+.hero-note {
+    position: absolute;
+    right: 34px;
+    bottom: 16px;
+    width: 310px;
+    padding: 24px 26px;
+    background: var(--red);
+    color: var(--white);
+    box-shadow: 0 24px 50px rgba(80, 10, 10, .18);
+}
+
+.hero-note span {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 8px;
+    letter-spacing: .36em;
+    text-transform: uppercase;
+}
+
+.hero-note strong {
+    display: block;
+    font-size: 24px;
+    line-height: 1.15;
+}
+
+.image-card img {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.image-card img:not([hidden]) + span {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 16px;
+    z-index: 2;
+    padding: 12px 14px;
+    background: rgba(255,255,255,.9);
+    color: var(--black);
+    font-size: 14px;
+}
+
+.image-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,.22));
+    opacity: 0;
+    pointer-events: none;
+}
+
+.image-card:has(img:not([hidden]))::after {
+    opacity: 1;
+}
+
+.portrait-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.portrait-card img {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.portrait-card img:not([hidden]) ~ span {
+    position: relative;
+    z-index: 2;
+    margin: 14px;
+    padding: 10px 12px;
+    background: rgba(255,255,255,.9);
+    color: var(--black);
+    font-size: 14px;
+}
+
+.portrait-card img:not([hidden]) ~ .portrait-caption {
+    position: relative;
+    z-index: 2;
+    margin-top: auto;
+}
+
+.portrait-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(0,0,0,.02) 0%, rgba(0,0,0,.05) 42%, rgba(0,0,0,.42) 100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.portrait-card:has(img:not([hidden]))::after {
+    opacity: 1;
+}
+
+.community-banner {
+    position: relative;
+    overflow: hidden;
+}
+
+.community-banner img {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: .26;
+    filter: grayscale(1);
+}
+
+.community-banner > span,
+.community-banner > div {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 1080px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 54px;
+    }
+
+    .hero-visual {
+        min-height: 520px;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 760px) {
+    .hero-visual {
+        min-height: 460px;
+    }
+
+    .hero-photo-main {
+        width: 82%;
+        height: 420px;
+    }
+
+    .hero-photo-small {
+        width: 46%;
+        height: 260px;
+        bottom: 64px;
+    }
+
+    .hero-note {
+        right: 16px;
+        width: min(300px, calc(100% - 32px));
+        padding: 20px;
+    }
+}

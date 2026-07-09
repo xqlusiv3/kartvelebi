@@ -16,5 +16,9 @@
         "postcss": "^8.5.16",
         "tailwindcss": "^4.3.2",
         "vite": "^8.0.0"
+    },
+    "dependencies": {
+        "@fontsource/lora": "^5.2.8",
+        "@fontsource/manrope": "^5.2.8"
     }
 }

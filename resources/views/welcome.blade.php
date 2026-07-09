@@ -8,7 +8,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-    <header class="site-header" id="top">
+    <div id="top"></div>
+    <header class="site-header">
         <div class="container header-inner">
             <a class="brand" href="#top" aria-label="Федеральная грузинская НКА в России">
                 <span class="brand-mark" aria-hidden="true">
@@ -39,10 +40,11 @@
         <section class="hero section-pad">
             <div class="container hero-grid">
                 <div class="hero-content">
-                    <div class="eyebrow eyebrow-line">
-                        <span>საქართველო · კულტურა</span>
-                        <span>федеральный уровень · с 2016 года</span>
-                    </div>
+                    <p class="hero-kicker">
+                        <span>საქართველო · культура</span>
+                        <span>федеральный уровень</span>
+                        <span>с 2016 года</span>
+                    </p>
                     <h1>Федеральная <span>грузинская</span> автономия в России</h1>
                     <p class="hero-quote">«Сохраняем культуру. Поддерживаем соотечественников. Укрепляем согласие.»</p>
                     <p class="hero-text">Федеральная национально-культурная автономия — общественная форма самоорганизации грузин России, направленная на сохранение языка, культуры, исторической памяти и развитие межнационального согласия.</p>

@@ -11,10 +11,9 @@
     <div id="top"></div>
     <header class="site-header">
         <div class="container header-inner">
-            <a class="brand" href="#top" aria-label="Федеральная грузинская НКА в России">
-                <span class="brand-mark" aria-hidden="true">
-                    <span></span><span></span><span></span><span></span>
-                </span>
+            <a class="brand" href="#top" data-scroll-top aria-label="Вернуться к началу страницы">
+            <span class="brand-symbol" aria-hidden="true">ФГ</span>
+
                 <span class="brand-text">
                     <strong>ФГНКА</strong>
                     <small>грузин России</small>
@@ -179,7 +178,7 @@
                                 <small>Президент ФГНКА</small>
                             </div>
                         </div>
-                        <div class="signature"><span class="mini-logo" aria-hidden="true"></span>Федеральная грузинская НКА в России</div>
+                        <span class="leader-tag">ФГНКА России</span>
                     </div>
 
                     <div class="leader-text">
@@ -256,8 +255,8 @@
                     <h2>Мы всегда на связи</h2>
                     <p class="contacts-lead">Есть вопросы, предложения по сотрудничеству или инициативы для совместной работы? Напишите нам — мы открыты к диалогу с соотечественниками, региональными объединениями и партнёрами.</p>
                     <div class="contact-list">
-                        <div><span>Адрес</span><strong>г. Москва, адрес уточняется</strong></div>
-                        <div><span>Телефон</span><strong><a href="tel:+74951234567">телефон уточняется</a></strong></div>
+                        <div><span>Адрес</span><strong>г. Москва, Подсосенский переулок, 21с1, 105062</strong></div>
+                        <div><span>Телефон</span><strong><a href="tel:+74952305634">+7 (495) 230-56-34</a></strong></div>
                         <div><span>E-mail</span><strong><a href="mailto:info@kartvelebi.ru">info@kartvelebi.ru</a></strong></div>
                         <div><span>Режим работы</span><strong>Пн–Пт, 10:00–18:00</strong></div>
                     </div>

@@ -35,6 +35,65 @@
             <a class="btn btn-red header-cta" href="#join">Присоединиться</a>
         </div>
     </header>
+    @if($homeNews->isNotEmpty())
+    <section class="news-section" id="news">
+        <div class="container">
+            <div class="section-head news-head">
+                <div>
+                    <p class="eyebrow">Новости и события</p>
+                    <h2>Жизнь автономии</h2>
+                </div>
+
+                <div class="news-controls" aria-label="Управление новостями">
+                    <button class="news-arrow" type="button" data-news-prev aria-label="Предыдущие новости">
+                        ←
+                    </button>
+                    <button class="news-arrow" type="button" data-news-next aria-label="Следующие новости">
+                        →
+                    </button>
+                </div>
+            </div>
+
+            <div class="news-carousel" data-news-carousel>
+                @foreach($homeNews as $news)
+                    <article class="news-card">
+                        <a href="#" class="news-card-link" aria-label="{{ $news->title }}">
+                            <figure class="news-card-image">
+                                @if($news->image_url)
+                                    <img src="{{ $news->image_url }}" alt="{{ $news->title }}">
+                                @else
+                                    <div class="news-card-placeholder">
+                                        ФГНКА
+                                    </div>
+                                @endif
+                            </figure>
+
+                            <div class="news-card-body">
+                                <div class="news-card-meta">
+                                    @if($news->category)
+                                        <span>{{ $news->category }}</span>
+                                    @endif
+
+                                    @if($news->published_at)
+                                        <time datetime="{{ $news->published_at->format('Y-m-d') }}">
+                                            {{ $news->published_at->format('d.m.Y') }}
+                                        </time>
+                                    @endif
+                                </div>
+
+                                <h3>{{ $news->title }}</h3>
+
+                                @if($news->excerpt)
+                                    <p>{{ $news->excerpt }}</p>
+                                @endif
+                            </div>
+                        </a>
+                    </article>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
 
     <main>
         <section class="hero section-pad">

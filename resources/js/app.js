@@ -20,3 +20,55 @@ nav?.querySelectorAll('a').forEach((link) => {
         toggle?.setAttribute('aria-expanded', 'false');
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.querySelector('[data-news-carousel]');
+    const prevButton = document.querySelector('[data-news-prev]');
+    const nextButton = document.querySelector('[data-news-next]');
+
+    if (!carousel || !prevButton || !nextButton) {
+        return;
+    }
+
+    const getScrollAmount = () => {
+        const card = carousel.querySelector('.news-card');
+
+        if (!card) {
+            return carousel.clientWidth;
+        }
+
+        const styles = window.getComputedStyle(carousel);
+        const gap = parseFloat(styles.columnGap || styles.gap || 0);
+
+        return card.getBoundingClientRect().width + gap;
+    };
+
+    const updateButtons = () => {
+        const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+
+        prevButton.disabled = carousel.scrollLeft <= 2;
+        nextButton.disabled = carousel.scrollLeft >= maxScrollLeft - 2;
+
+        prevButton.classList.toggle('is-disabled', prevButton.disabled);
+        nextButton.classList.toggle('is-disabled', nextButton.disabled);
+    };
+
+    prevButton.addEventListener('click', () => {
+        carousel.scrollBy({
+            left: -getScrollAmount(),
+            behavior: 'smooth',
+        });
+    });
+
+    nextButton.addEventListener('click', () => {
+        carousel.scrollBy({
+            left: getScrollAmount(),
+            behavior: 'smooth',
+        });
+    });
+
+    carousel.addEventListener('scroll', updateButtons);
+    window.addEventListener('resize', updateButtons);
+
+    updateButtons();
+});

@@ -13,7 +13,7 @@ class NewsController extends Controller
             ->published()
             ->orderByDesc('published_at')
             ->orderByDesc('id')
-            ->paginate(9);
+            ->paginate(10);
 
         return view('news.index', compact('newsList'));
     }

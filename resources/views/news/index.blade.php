@@ -26,6 +26,7 @@
 
             <nav class="main-nav" aria-label="Основная навигация">
                 <a href="{{ route('home') }}#about">Об автономии</a>
+                <a href="{{ route('news.index') }}" aria-current="page">Новости</a>
                 <a href="{{ route('home') }}#leader">Руководство</a>
                 <a href="{{ route('home') }}#activity">Направления работы</a>
                 <a href="{{ route('home') }}#contacts">Контакты</a>
@@ -38,47 +39,102 @@
     <main class="news-page">
         <section class="news-archive section-pad">
             <div class="container">
-                <div class="section-title title-bordered">
-                    <span>Новости и события</span>
-                    <h1>Все новости автономии</h1>
+                <div class="news-archive-hero">
+                    <a class="back-link" href="{{ route('home') }}#news">← На главную</a>
+
+                    <div class="section-title title-bordered news-archive-title">
+                        <span>Новости и события</span>
+                        <h1>Новости автономии</h1>
+                    </div>
+
+                    <p class="news-archive-lead">
+                        Актуальная хроника деятельности ФГНКА: культурные проекты, общественные инициативы, встречи, объявления и события регионального значения.
+                    </p>
                 </div>
 
                 @if($newsList->isNotEmpty())
-                    <div class="news-archive-grid">
-                        @foreach($newsList as $news)
-                            <article class="news-card">
-                                <a href="{{ route('news.show', $news) }}" class="news-card-link" aria-label="{{ $news->title }}">
-                                    <figure class="news-card-image">
-                                        @if($news->image_url)
-                                            <img src="{{ $news->image_url }}" alt="{{ $news->title }}">
-                                        @else
-                                            <div class="news-card-placeholder">ФГНКА</div>
-                                        @endif
-                                    </figure>
+                    @php
+                        $featuredNews = $newsList->first();
+                        $regularNews = $newsList->skip(1);
+                    @endphp
 
-                                    <div class="news-card-body">
-                                        <div class="news-card-meta">
-                                            @if($news->category)
-                                                <span>{{ $news->category }}</span>
+                    <article class="news-featured">
+                        <a href="{{ route('news.show', $featuredNews) }}" class="news-featured-link" aria-label="{{ $featuredNews->title }}">
+                            <figure class="news-featured-image">
+                                @if($featuredNews->image_url)
+                                    <img src="{{ $featuredNews->image_url }}" alt="{{ $featuredNews->title }}">
+                                @else
+                                    <div class="news-card-placeholder">ФГНКА</div>
+                                @endif
+                            </figure>
+
+                            <div class="news-featured-body">
+                                <div class="news-card-meta">
+                                    @if($featuredNews->category)
+                                        <span>{{ $featuredNews->category }}</span>
+                                    @endif
+
+                                    @if($featuredNews->published_at)
+                                        <time datetime="{{ $featuredNews->published_at->format('Y-m-d') }}">
+                                            {{ $featuredNews->published_at->format('d.m.Y') }}
+                                        </time>
+                                    @endif
+                                </div>
+
+                                <h2>{{ $featuredNews->title }}</h2>
+
+                                @if($featuredNews->excerpt)
+                                    <p>{{ $featuredNews->excerpt }}</p>
+                                @endif
+
+                                <span class="read-more">Читать полностью →</span>
+                            </div>
+                        </a>
+                    </article>
+
+                    @if($regularNews->isNotEmpty())
+                        <div class="news-list-head">
+                            <span>Последние публикации</span>
+                        </div>
+
+                        <div class="news-list">
+                            @foreach($regularNews as $news)
+                                <article class="news-list-item">
+                                    <a href="{{ route('news.show', $news) }}" class="news-list-link" aria-label="{{ $news->title }}">
+                                        <figure class="news-list-image">
+                                            @if($news->image_url)
+                                                <img src="{{ $news->image_url }}" alt="{{ $news->title }}">
+                                            @else
+                                                <div class="news-card-placeholder">ФГНКА</div>
                                             @endif
+                                        </figure>
 
-                                            @if($news->published_at)
-                                                <time datetime="{{ $news->published_at->format('Y-m-d') }}">
-                                                    {{ $news->published_at->format('d.m.Y') }}
-                                                </time>
+                                        <div class="news-list-body">
+                                            <div class="news-card-meta">
+                                                @if($news->category)
+                                                    <span>{{ $news->category }}</span>
+                                                @endif
+
+                                                @if($news->published_at)
+                                                    <time datetime="{{ $news->published_at->format('Y-m-d') }}">
+                                                        {{ $news->published_at->format('d.m.Y') }}
+                                                    </time>
+                                                @endif
+                                            </div>
+
+                                            <h2>{{ $news->title }}</h2>
+
+                                            @if($news->excerpt)
+                                                <p>{{ $news->excerpt }}</p>
                                             @endif
                                         </div>
 
-                                        <h3>{{ $news->title }}</h3>
-
-                                        @if($news->excerpt)
-                                            <p>{{ $news->excerpt }}</p>
-                                        @endif
-                                    </div>
-                                </a>
-                            </article>
-                        @endforeach
-                    </div>
+                                        <span class="news-list-arrow" aria-hidden="true">→</span>
+                                    </a>
+                                </article>
+                            @endforeach
+                        </div>
+                    @endif
 
                     @if($newsList->hasPages())
                         <nav class="simple-pagination" aria-label="Навигация по новостям">
@@ -112,6 +168,7 @@
             </a>
             <nav>
                 <a href="{{ route('home') }}#about">Об автономии</a>
+                <a href="{{ route('news.index') }}">Новости</a>
                 <a href="{{ route('home') }}#leader">Руководство</a>
                 <a href="{{ route('home') }}#activity">Направления работы</a>
                 <a href="{{ route('home') }}#contacts">Контакты</a>

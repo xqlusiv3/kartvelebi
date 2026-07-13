@@ -124,6 +124,7 @@
             </a>
             <nav>
                 <a href="{{ route('home') }}#about">Об автономии</a>
+                <a href="{{ route('news.index') }}">Новости</a>
                 <a href="{{ route('home') }}#leader">Руководство</a>
                 <a href="{{ route('home') }}#activity">Направления работы</a>
                 <a href="{{ route('home') }}#contacts">Контакты</a>

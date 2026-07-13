@@ -26,6 +26,7 @@
 
             <nav class="main-nav" aria-label="Основная навигация">
                 <a href="#about">Об автономии</a>
+                <a href="{{ route('news.index') }}">Новости</a>
                 <a href="#leader">Руководство</a>
                 <a href="#activity">Направления работы</a>
                 <a href="#contacts">Контакты</a>
@@ -283,6 +284,7 @@
             </a>
             <nav>
                 <a href="#about">Об автономии</a>
+                <a href="{{ route('news.index') }}">Новости</a>
                 <a href="#leader">Руководство</a>
                 <a href="#activity">Направления работы</a>
                 <a href="#contacts">Контакты</a>

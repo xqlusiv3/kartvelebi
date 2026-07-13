@@ -34,6 +34,47 @@
             <a class="btn btn-red header-cta" href="#join">Присоединиться</a>
         </div>
     </header>
+
+    <main>
+        <section class="hero section-pad">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <p class="hero-kicker">
+                        <span>საქართველო · культура</span>
+                        <span>федеральный уровень</span>
+                        <span>с 2016 года</span>
+                    </p>
+                    <h1 class="hero-title">Федеральная <span>грузинская</span> автономия в России</h1>
+                    <p class="hero-quote">«Сохраняем культуру. Поддерживаем соотечественников. Укрепляем согласие.»</p>
+                    <p class="hero-text">Федеральная национально-культурная автономия — общественная форма самоорганизации грузин России, направленная на сохранение языка, культуры, исторической памяти и развитие межнационального согласия.</p>
+                    <div class="hero-actions">
+                        <a class="btn btn-red" href="#about">Об автономии <span>→</span></a>
+                        <a class="btn btn-outline" href="#activity">Направления работы</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual" aria-label="Грузия и Россия — культурная связь">
+                    <div class="hero-photo hero-photo-main">
+                        <img src="{{ asset('images/hero-community.jpg') }}" alt="Культурная встреча ФГНКА" onerror="this.hidden=true">
+                    </div>
+                    <div class="hero-photo hero-photo-small">
+                        <img src="{{ asset('images/hero-georgia-russia.jpg') }}" alt="Грузинская культура в России" onerror="this.hidden=true">
+                    </div>
+                    <div class="hero-note">
+                        <span>Культура · диалог · доверие</span>
+                        <strong>Связь поколений и народов</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-bar" aria-label="Ключевые показатели организации">
+                <div class="stat"><strong>ФНКА</strong><span>федеральный уровень организации</span></div>
+                <div class="stat"><strong>2016</strong><span>год создания автономии</span></div>
+                <div class="stat"><strong>культура</strong><span>язык · традиции · просвещение</span></div>
+                <div class="stat"><strong>регионы</strong><span>взаимодействие с сообществами</span></div>
+            </div>
+        </section>
+
     @if($homeNews->isNotEmpty())
     <section class="news-section" id="news">
         <div class="container">
@@ -44,6 +85,8 @@
                 </div>
 
                 <div class="news-controls" aria-label="Управление новостями">
+                    <a class="news-all-link" href="{{ route('news.index') }}">Все новости</a>
+
                     <button class="news-arrow" type="button" data-news-prev aria-label="Предыдущие новости">
                         ←
                     </button>
@@ -56,7 +99,7 @@
             <div class="news-carousel" data-news-carousel>
                 @foreach($homeNews as $news)
                     <article class="news-card">
-                        <a href="#" class="news-card-link" aria-label="{{ $news->title }}">
+                        <a href="{{ route('news.show', $news) }}" class="news-card-link" aria-label="{{ $news->title }}">
                             <figure class="news-card-image">
                                 @if($news->image_url)
                                     <img src="{{ $news->image_url }}" alt="{{ $news->title }}">
@@ -93,46 +136,6 @@
         </div>
     </section>
     @endif
-
-    <main>
-        <section class="hero section-pad">
-            <div class="container hero-grid">
-                <div class="hero-content">
-                    <p class="hero-kicker">
-                        <span>საქართველო · культура</span>
-                        <span>федеральный уровень</span>
-                        <span>с 2016 года</span>
-                    </p>
-                    <h1>Федеральная <span>грузинская</span> автономия в России</h1>
-                    <p class="hero-quote">«Сохраняем культуру. Поддерживаем соотечественников. Укрепляем согласие.»</p>
-                    <p class="hero-text">Федеральная национально-культурная автономия — общественная форма самоорганизации грузин России, направленная на сохранение языка, культуры, исторической памяти и развитие межнационального согласия.</p>
-                    <div class="hero-actions">
-                        <a class="btn btn-red" href="#about">Об автономии <span>→</span></a>
-                        <a class="btn btn-outline" href="#activity">Направления работы</a>
-                    </div>
-                </div>
-
-                <div class="hero-visual" aria-label="Грузия и Россия — культурная связь">
-                    <div class="hero-photo hero-photo-main">
-                        <img src="{{ asset('images/hero-community.jpg') }}" alt="Культурная встреча ФГНКА" onerror="this.hidden=true">
-                    </div>
-                    <div class="hero-photo hero-photo-small">
-                        <img src="{{ asset('images/hero-georgia-russia.jpg') }}" alt="Грузинская культура в России" onerror="this.hidden=true">
-                    </div>
-                    <div class="hero-note">
-                        <span>Культура · диалог · доверие</span>
-                        <strong>Связь поколений и народов</strong>
-                    </div>
-                </div>
-            </div>
-
-            <div class="stats-bar" aria-label="Ключевые показатели организации">
-                <div class="stat"><strong>ФНКА</strong><span>федеральный уровень организации</span></div>
-                <div class="stat"><strong>2016</strong><span>год создания автономии</span></div>
-                <div class="stat"><strong>культура</strong><span>язык · традиции · просвещение</span></div>
-                <div class="stat"><strong>регионы</strong><span>взаимодействие с сообществами</span></div>
-            </div>
-        </section>
 
         <section class="about section-pad" id="about">
             <div class="container">

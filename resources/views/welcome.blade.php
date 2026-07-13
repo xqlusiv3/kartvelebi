@@ -261,7 +261,6 @@
                         <div><span>Режим работы</span><strong>Пн–Пт, 10:00–18:00</strong></div>
                     </div>
                 </div>
-
                 <div class="join-card">
                     <span class="large-mark" aria-hidden="true"></span>
                     <small>Стать участником работы</small>

@@ -72,3 +72,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateButtons();
 });
+
+document.querySelectorAll('[data-copy-link]').forEach((button) => {
+    button.addEventListener('click', async () => {
+        const link = button.dataset.copyLink;
+        const originalText = button.textContent;
+
+        try {
+            await navigator.clipboard.writeText(link);
+            button.textContent = 'Ссылка скопирована';
+        } catch (error) {
+            button.textContent = 'Скопируйте из адресной строки';
+        }
+
+        window.setTimeout(() => {
+            button.textContent = originalText;
+        }, 1800);
+    });
+});

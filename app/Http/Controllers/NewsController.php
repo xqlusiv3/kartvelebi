@@ -18,7 +18,7 @@ class NewsController extends Controller
             'Партнёрство',
         ];
 
-        $activeCategory = $request->string('category')->toString();
+        $activeCategory = $request->query('category');
 
         if (! in_array($activeCategory, $categories, true)) {
             $activeCategory = null;
@@ -29,7 +29,7 @@ class NewsController extends Controller
             ->when($activeCategory, fn ($query) => $query->where('category', $activeCategory))
             ->orderByDesc('published_at')
             ->orderByDesc('id')
-            ->paginate(10)
+            ->paginate(9)
             ->withQueryString();
 
         return view('news.index', compact('newsList', 'categories', 'activeCategory'));
@@ -44,13 +44,56 @@ class NewsController extends Controller
             404
         );
 
+        $previousNews = News::query()
+            ->published()
+            ->where(function ($query) use ($news) {
+                $query
+                    ->whereDate('published_at', '>', $news->published_at)
+                    ->orWhere(function ($query) use ($news) {
+                        $query
+                            ->whereDate('published_at', $news->published_at)
+                            ->where('id', '>', $news->id);
+                    });
+            })
+            ->orderBy('published_at')
+            ->orderBy('id')
+            ->first();
+
+        $nextNews = News::query()
+            ->published()
+            ->where(function ($query) use ($news) {
+                $query
+                    ->whereDate('published_at', '<', $news->published_at)
+                    ->orWhere(function ($query) use ($news) {
+                        $query
+                            ->whereDate('published_at', $news->published_at)
+                            ->where('id', '<', $news->id);
+                    });
+            })
+            ->orderByDesc('published_at')
+            ->orderByDesc('id')
+            ->first();
+
         $relatedNews = News::query()
             ->published()
             ->whereKeyNot($news->id)
+            ->when($news->category, fn ($query) => $query->where('category', $news->category))
             ->orderByDesc('published_at')
             ->take(3)
             ->get();
 
-        return view('news.show', compact('news', 'relatedNews'));
+        if ($relatedNews->count() < 3) {
+            $fallbackNews = News::query()
+                ->published()
+                ->whereKeyNot($news->id)
+                ->whereNotIn('id', $relatedNews->pluck('id'))
+                ->orderByDesc('published_at')
+                ->take(3 - $relatedNews->count())
+                ->get();
+
+            $relatedNews = $relatedNews->concat($fallbackNews);
+        }
+
+        return view('news.show', compact('news', 'relatedNews', 'previousNews', 'nextNews'));
     }
 }

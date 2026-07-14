@@ -5,36 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $news->title }} — ФГНКА в России</title>
+    <meta name="description" content="{{ $news->excerpt ?: 'Новость Федеральной грузинской национально-культурной автономии в России.' }}">
+    <meta property="og:title" content="{{ $news->title }} — ФГНКА в России">
+    <meta property="og:description" content="{{ $news->excerpt ?: 'Новость Федеральной грузинской национально-культурной автономии в России.' }}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ route('news.show', $news) }}">
+    @if($news->image_url)
+        <meta property="og:image" content="{{ $news->image_url }}">
+    @endif
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
     <div id="top"></div>
-    <header class="site-header">
-        <div class="container header-inner">
-            <a class="brand" href="{{ route('home') }}#top" aria-label="Вернуться на главную страницу">
-                <span class="brand-symbol" aria-hidden="true">ФГ</span>
-
-                <span class="brand-text">
-                    <strong>ФГНКА</strong>
-                    <small>грузин России</small>
-                </span>
-            </a>
-
-            <button class="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-
-            <nav class="main-nav" aria-label="Основная навигация">
-                <a href="{{ route('home') }}#about">Об автономии</a>
-                <a href="{{ route('news.index') }}">Новости</a>
-                <a href="{{ route('home') }}#leader">Руководство</a>
-                <a href="{{ route('home') }}#activity">Направления работы</a>
-                <a href="{{ route('home') }}#contacts">Контакты</a>
-            </nav>
-
-            <a class="btn btn-red header-cta" href="{{ route('home') }}#join">Присоединиться</a>
-        </div>
-    </header>
+    <x-site-header active="news" />
 
     <main class="news-single-page">
         <article class="news-single section-pad">
@@ -59,6 +42,13 @@
                     <p class="news-single-excerpt">{{ $news->excerpt }}</p>
                 @endif
 
+                <div class="news-share" aria-label="Поделиться новостью">
+                    <span>Поделиться</span>
+                    <a href="https://t.me/share/url?url={{ urlencode(route('news.show', $news)) }}&text={{ urlencode($news->title) }}" target="_blank" rel="noopener">Telegram</a>
+                    <a href="https://api.whatsapp.com/send?text={{ urlencode($news->title . ' ' . route('news.show', $news)) }}" target="_blank" rel="noopener">WhatsApp</a>
+                    <button type="button" data-copy-link="{{ route('news.show', $news) }}">Скопировать ссылку</button>
+                </div>
+
                 @if($news->image_url)
                     <figure class="news-single-image">
                         <img src="{{ $news->image_url }}" alt="{{ $news->title }}">
@@ -70,8 +60,38 @@
                         {!! $news->content !!}
                     </div>
                 @endif
+
+                <div class="news-single-bottom">
+                    <a class="back-link" href="{{ route('news.index') }}">← Все новости</a>
+                </div>
             </div>
         </article>
+
+        @if($previousNews || $nextNews)
+            <section class="news-neighbor-section">
+                <div class="container news-single-container">
+                    <div class="news-neighbor-grid">
+                        @if($previousNews)
+                            <a class="news-neighbor-card" href="{{ route('news.show', $previousNews) }}">
+                                <span>Новее</span>
+                                <strong>{{ $previousNews->title }}</strong>
+                            </a>
+                        @else
+                            <span class="news-neighbor-card is-empty"></span>
+                        @endif
+
+                        @if($nextNews)
+                            <a class="news-neighbor-card is-next" href="{{ route('news.show', $nextNews) }}">
+                                <span>Старее</span>
+                                <strong>{{ $nextNews->title }}</strong>
+                            </a>
+                        @else
+                            <span class="news-neighbor-card is-empty"></span>
+                        @endif
+                    </div>
+                </div>
+            </section>
+        @endif
 
         @if($relatedNews->isNotEmpty())
             <section class="related-news section-pad">
@@ -107,6 +127,7 @@
                                         </div>
 
                                         <h3>{{ $item->title }}</h3>
+                                        <span class="text-read-link">Читать <span>→</span></span>
                                     </div>
                                 </a>
                             </article>
@@ -117,21 +138,6 @@
         @endif
     </main>
 
-    <footer class="footer">
-        <div class="container footer-inner">
-            <a class="brand brand-footer" href="{{ route('home') }}#top">
-                <span class="brand-symbol brand-footer-symbol" aria-hidden="true">ФГ</span>
-                <span class="brand-footer-text">Федеральная грузинская НКА в России</span>
-            </a>
-            <nav>
-                <a href="{{ route('home') }}#about">Об автономии</a>
-                <a href="{{ route('news.index') }}">Новости</a>
-                <a href="{{ route('home') }}#leader">Руководство</a>
-                <a href="{{ route('home') }}#activity">Направления работы</a>
-                <a href="{{ route('home') }}#contacts">Контакты</a>
-            </nav>
-            <span>© 2026 · საქართველო</span>
-        </div>
-    </footer>
+    <x-site-footer />
 </body>
 </html>

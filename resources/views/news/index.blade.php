@@ -26,7 +26,7 @@
 
             <nav class="main-nav" aria-label="Основная навигация">
                 <a href="{{ route('home') }}#about">Об автономии</a>
-                <a href="{{ route('news.index') }}" aria-current="page">Новости</a>
+                <a href="{{ route('news.index') }}">Новости</a>
                 <a href="{{ route('home') }}#leader">Руководство</a>
                 <a href="{{ route('home') }}#activity">Направления работы</a>
                 <a href="{{ route('home') }}#contacts">Контакты</a>
@@ -39,18 +39,28 @@
     <main class="news-page">
         <section class="news-archive section-pad">
             <div class="container">
-                <div class="news-archive-hero">
-                    <a class="back-link" href="{{ route('home') }}#news">← На главную</a>
-
-                    <div class="section-title title-bordered news-archive-title">
+                <div class="news-archive-top">
+                    <div class="section-title title-bordered">
                         <span>Новости и события</span>
-                        <h1>Новости автономии</h1>
+                        <h1>Все новости автономии</h1>
                     </div>
 
                     <p class="news-archive-lead">
-                        Актуальная хроника деятельности ФГНКА: культурные проекты, общественные инициативы, встречи, объявления и события регионального значения.
+                        Актуальная хроника деятельности ФГНКА, культурных проектов, встреч, общественных инициатив и важных объявлений.
                     </p>
                 </div>
+
+                <nav class="news-filter" aria-label="Фильтр новостей по категориям">
+                    <a href="{{ route('news.index') }}" @class(['is-active' => $activeCategory === null])>
+                        Все
+                    </a>
+
+                    @foreach($categories as $category)
+                        <a href="{{ route('news.index', ['category' => $category]) }}" @class(['is-active' => $activeCategory === $category])>
+                            {{ $category }}
+                        </a>
+                    @endforeach
+                </nav>
 
                 @if($newsList->isNotEmpty())
                     @php
@@ -59,37 +69,37 @@
                     @endphp
 
                     <article class="news-featured">
-                        <a href="{{ route('news.show', $featuredNews) }}" class="news-featured-link" aria-label="{{ $featuredNews->title }}">
-                            <figure class="news-featured-image">
-                                @if($featuredNews->image_url)
-                                    <img src="{{ $featuredNews->image_url }}" alt="{{ $featuredNews->title }}">
-                                @else
-                                    <div class="news-card-placeholder">ФГНКА</div>
-                                @endif
-                            </figure>
-
-                            <div class="news-featured-body">
-                                <div class="news-card-meta">
-                                    @if($featuredNews->category)
-                                        <span>{{ $featuredNews->category }}</span>
-                                    @endif
-
-                                    @if($featuredNews->published_at)
-                                        <time datetime="{{ $featuredNews->published_at->format('Y-m-d') }}">
-                                            {{ $featuredNews->published_at->format('d.m.Y') }}
-                                        </time>
-                                    @endif
-                                </div>
-
-                                <h2>{{ $featuredNews->title }}</h2>
-
-                                @if($featuredNews->excerpt)
-                                    <p>{{ $featuredNews->excerpt }}</p>
-                                @endif
-
-                                <span class="read-more">Читать полностью →</span>
-                            </div>
+                        <a class="news-featured-image" href="{{ route('news.show', $featuredNews) }}" aria-label="{{ $featuredNews->title }}">
+                            @if($featuredNews->image_url)
+                                <img src="{{ $featuredNews->image_url }}" alt="{{ $featuredNews->title }}">
+                            @else
+                                <div class="news-card-placeholder">ФГНКА</div>
+                            @endif
                         </a>
+
+                        <div class="news-featured-body">
+                            <div class="news-card-meta news-featured-meta">
+                                @if($featuredNews->category)
+                                    <span>{{ $featuredNews->category }}</span>
+                                @endif
+
+                                @if($featuredNews->published_at)
+                                    <time datetime="{{ $featuredNews->published_at->format('Y-m-d') }}">
+                                        {{ $featuredNews->published_at->format('d.m.Y') }}
+                                    </time>
+                                @endif
+                            </div>
+
+                            <h2>
+                                <a href="{{ route('news.show', $featuredNews) }}">{{ $featuredNews->title }}</a>
+                            </h2>
+
+                            @if($featuredNews->excerpt)
+                                <p>{{ $featuredNews->excerpt }}</p>
+                            @endif
+
+                            <a class="news-read-link" href="{{ route('news.show', $featuredNews) }}">Читать полностью →</a>
+                        </div>
                     </article>
 
                     @if($regularNews->isNotEmpty())
@@ -100,37 +110,37 @@
                         <div class="news-list">
                             @foreach($regularNews as $news)
                                 <article class="news-list-item">
-                                    <a href="{{ route('news.show', $news) }}" class="news-list-link" aria-label="{{ $news->title }}">
-                                        <figure class="news-list-image">
-                                            @if($news->image_url)
-                                                <img src="{{ $news->image_url }}" alt="{{ $news->title }}">
-                                            @else
-                                                <div class="news-card-placeholder">ФГНКА</div>
+                                    <a class="news-list-image" href="{{ route('news.show', $news) }}" aria-label="{{ $news->title }}">
+                                        @if($news->image_url)
+                                            <img src="{{ $news->image_url }}" alt="{{ $news->title }}">
+                                        @else
+                                            <div class="news-card-placeholder">ФГНКА</div>
+                                        @endif
+                                    </a>
+
+                                    <div class="news-list-body">
+                                        <div class="news-card-meta news-list-meta">
+                                            @if($news->category)
+                                                <span>{{ $news->category }}</span>
                                             @endif
-                                        </figure>
 
-                                        <div class="news-list-body">
-                                            <div class="news-card-meta">
-                                                @if($news->category)
-                                                    <span>{{ $news->category }}</span>
-                                                @endif
-
-                                                @if($news->published_at)
-                                                    <time datetime="{{ $news->published_at->format('Y-m-d') }}">
-                                                        {{ $news->published_at->format('d.m.Y') }}
-                                                    </time>
-                                                @endif
-                                            </div>
-
-                                            <h2>{{ $news->title }}</h2>
-
-                                            @if($news->excerpt)
-                                                <p>{{ $news->excerpt }}</p>
+                                            @if($news->published_at)
+                                                <time datetime="{{ $news->published_at->format('Y-m-d') }}">
+                                                    {{ $news->published_at->format('d.m.Y') }}
+                                                </time>
                                             @endif
                                         </div>
 
-                                        <span class="news-list-arrow" aria-hidden="true">→</span>
-                                    </a>
+                                        <h2>
+                                            <a href="{{ route('news.show', $news) }}">{{ $news->title }}</a>
+                                        </h2>
+
+                                        @if($news->excerpt)
+                                            <p>{{ $news->excerpt }}</p>
+                                        @endif
+
+                                        <a class="news-read-link" href="{{ route('news.show', $news) }}">Читать →</a>
+                                    </div>
                                 </article>
                             @endforeach
                         </div>
@@ -154,7 +164,7 @@
                         </nav>
                     @endif
                 @else
-                    <p class="news-empty">Пока опубликованных новостей нет.</p>
+                    <p class="news-empty">Пока опубликованных новостей в этой категории нет.</p>
                 @endif
             </div>
         </section>

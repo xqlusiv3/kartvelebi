@@ -129,6 +129,8 @@
                                 @if($news->excerpt)
                                     <p>{{ $news->excerpt }}</p>
                                 @endif
+
+                                <span class="news-read-link">Читать →</span>
                             </div>
                         </a>
                     </article>

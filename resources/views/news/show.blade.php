@@ -106,6 +106,8 @@
                                         </div>
 
                                         <h3>{{ $item->title }}</h3>
+
+                                        <span class="news-read-link">Читать →</span>
                                     </div>
                                 </a>
                             </article>

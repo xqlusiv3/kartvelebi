@@ -280,16 +280,16 @@
 
     <footer class="footer">
         <div class="container footer-inner">
-            <a class="brand brand-footer" href="#top">
-                <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-                <span class="brand-text">Федеральная грузинская НКА в России</span>
+            <a class="brand brand-footer" href="{{ route('home') }}#top">
+                <span class="brand-symbol brand-footer-symbol" aria-hidden="true">ФГ</span>
+                <span class="brand-footer-text">Федеральная грузинская НКА в России</span>
             </a>
             <nav>
-                <a href="#about">Об автономии</a>
+                <a href="{{ route('home') }}#about">Об автономии</a>
                 <a href="{{ route('news.index') }}">Новости</a>
-                <a href="#leader">Руководство</a>
-                <a href="#activity">Направления работы</a>
-                <a href="#contacts">Контакты</a>
+                <a href="{{ route('home') }}#leader">Руководство</a>
+                <a href="{{ route('home') }}#activity">Направления работы</a>
+                <a href="{{ route('home') }}#contacts">Контакты</a>
             </nav>
             <span>© 2026 · საქართველო</span>
         </div>

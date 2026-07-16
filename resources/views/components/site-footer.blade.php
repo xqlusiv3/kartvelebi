@@ -20,6 +20,7 @@
         <nav aria-label="Навигация в подвале сайта">
             <a href="{{ $aboutHref }}">Об автономии</a>
             <a href="{{ route('news.index') }}">Новости</a>
+            <a href="{{ route('regions.index') }}">Регионы</a>
             <a href="{{ $leaderHref }}">Руководство</a>
             <a href="{{ $activityHref }}">Направления работы</a>
             <a href="{{ $contactsHref }}">Контакты</a>

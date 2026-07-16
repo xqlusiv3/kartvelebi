@@ -9,32 +9,7 @@
 </head>
 <body>
     <div id="top"></div>
-    <header class="site-header">
-        <div class="container header-inner">
-            <a class="brand" href="#top" data-scroll-top aria-label="Вернуться к началу страницы">
-            <span class="brand-symbol" aria-hidden="true">ФГ</span>
-
-                <span class="brand-text">
-                    <strong>ФГНКА</strong>
-                    <small>грузин России</small>
-                </span>
-            </a>
-
-            <button class="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-
-            <nav class="main-nav" aria-label="Основная навигация">
-                <a href="#about">Об автономии</a>
-                <a href="{{ route('news.index') }}">Новости</a>
-                <a href="#leader">Руководство</a>
-                <a href="#activity">Направления работы</a>
-                <a href="#contacts">Контакты</a>
-            </nav>
-
-            <a class="btn btn-red header-cta" href="#join">Присоединиться</a>
-        </div>
-    </header>
+    <x-site-header :home="true" />
 
     <main>
         <section class="hero section-pad">
@@ -278,21 +253,6 @@
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container footer-inner">
-            <a class="brand brand-footer" href="{{ route('home') }}#top">
-                <span class="brand-symbol brand-footer-symbol" aria-hidden="true">ФГ</span>
-                <span class="brand-footer-text">Федеральная грузинская НКА в России</span>
-            </a>
-            <nav>
-                <a href="{{ route('home') }}#about">Об автономии</a>
-                <a href="{{ route('news.index') }}">Новости</a>
-                <a href="{{ route('home') }}#leader">Руководство</a>
-                <a href="{{ route('home') }}#activity">Направления работы</a>
-                <a href="{{ route('home') }}#contacts">Контакты</a>
-            </nav>
-            <span>© 2026 · საქართველო</span>
-        </div>
-    </footer>
+    <x-site-footer :home="true" />
 </body>
 </html>

@@ -30,6 +30,7 @@
         <nav class="main-nav" aria-label="Основная навигация">
             <a href="{{ $aboutHref }}">Об автономии</a>
             <a href="{{ route('news.index') }}" class="{{ $active === 'news' ? 'is-active' : '' }}">Новости</a>
+            <a href="{{ route('regions.index') }}" class="{{ $active === 'regions' ? 'is-active' : '' }}">Регионы</a>
             <a href="{{ $leaderHref }}">Руководство</a>
             <a href="{{ $activityHref }}">Направления работы</a>
             <a href="{{ $contactsHref }}">Контакты</a>
